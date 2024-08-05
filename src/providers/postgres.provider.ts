@@ -19,9 +19,9 @@ import { ConfigService } from "@nestjs/config";
         ],
         migrationsTableName: "migration",
         synchronize: configService.getOrThrow("SQL_SYNC")=== "true",
-        ssl: {
-          rejectUnauthorized: configService.getOrThrow("SQL_REJECT_UNAUTHORIZED") === "true"
-        }
+        // ssl: {
+        //   rejectUnauthorized: configService.getOrThrow("SQL_REJECT_UNAUTHORIZED") === "true"
+        // }
       }),
       inject: [ConfigService]
     })

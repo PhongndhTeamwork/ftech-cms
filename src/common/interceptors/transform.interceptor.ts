@@ -9,7 +9,7 @@ export class TransformInterceptor implements NestInterceptor {
     const statusCode = response.statusCode;
     return next.handle().pipe(map((data) => {
       if (typeof data === "string") { // Data in string
-        return {
+        data = {
           message: data
         };
       }
