@@ -17,7 +17,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) {
-    console.log(profile.id, profile.displayName, profile.emails[0].value, profile.photos[0].value);
     const newLoginDto = new LoginDto(profile.emails[0].value, profile.id, profile.photos[0].value, profile.displayName);
     const result = await this.authenticationService.signIn(newLoginDto);
     done(null, result);
