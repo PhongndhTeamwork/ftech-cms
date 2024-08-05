@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { WhitelistService } from "./whitelist.service";
 import { WhitelistEntity } from "@model/whitelist/entities/whitelist.entity";
 import { CreateWhitelistDto } from "@model/whitelist/dto/create-whitelist.dto";
@@ -27,7 +27,7 @@ export class WhitelistController {
     return await this.whitelistService.authorizeEmails(users);
   }
 
-  @Post(":id")
+  @Patch(":id")
   async updateAuthorizedUser(
     @Body() user: CreateWhitelistDto,
     @Param("id", ParseIntegerPipe) id: number
