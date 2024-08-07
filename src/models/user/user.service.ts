@@ -1,7 +1,8 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, Req, Res, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UserEntity } from "@model/user/entities/user.entity";
+import { Request, Response } from "express";
 
 @Injectable()
 export class UserService {
@@ -29,12 +30,18 @@ export class UserService {
     }
   }
 
-  async createUser(user : UserEntity) : Promise<UserEntity> {
+  async createUser(user: UserEntity): Promise<UserEntity> {
     try {
       const newUser = this.userRepository.create(user);
       return await this.userRepository.save(newUser);
-    }catch (error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
+  }
+
+  getProfile(@Req() req: Request) {
+    if (req.user) {
+      return req.user;
+    } else throw new UnauthorizedException();
   }
 }

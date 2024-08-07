@@ -50,6 +50,5 @@ export class AuthenticationController {
     const user: UserEntity = await this.authenticationService.signIn(newLoginDto);
     const token = await this.authenticationService.generateJwt({ ...user });
     return { token };
-
   }
 }
